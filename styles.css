@@ -368,14 +368,17 @@ button.pill:hover {
 
 .intro {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  /* The body copy gets the wider column; the key words sit in the narrower one */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
   gap: 3rem;
   align-items: start;
 }
 
-/* The statement sits bottom-left, lined up with the end of the intro copy */
+/* The statement sits bottom-left, lined up with the end of the intro copy,
+   sized to fit its narrower column */
 .intro .statement {
   align-self: end;
+  font-size: clamp(2.2rem, 3.6vw, 3.1rem);
 }
 
 main > .intro {
@@ -391,7 +394,7 @@ main > .intro {
 }
 
 .intro-copy {
-  max-width: 420px;
+  max-width: 520px;
   justify-self: end;
   font-size: 1.05rem;
 }
