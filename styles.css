@@ -19,7 +19,7 @@
   --mono: 'Fragment Mono', ui-monospace, Menlo, monospace;
   --script: 'Ms Madi', cursive;
 
-  --max-width: 1080px;
+  --content-width: 880px; /* the text column; the side margins sit outside it */
   /* Side padding: 1.5rem on phones, growing to 6rem on wide screens */
   --gutter: clamp(2rem, 18vw - 3rem, 12rem); /* phones stay snug, wide screens get roomy margins */
 }
@@ -61,7 +61,7 @@ a {
 }
 
 .wrap {
-  max-width: var(--max-width);
+  max-width: calc(var(--content-width) + 2 * var(--gutter));
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--gutter);
@@ -370,7 +370,12 @@ button.pill:hover {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 3rem;
-  align-items: end;
+  align-items: start;
+}
+
+/* The statement sits bottom-left, lined up with the end of the intro copy */
+.intro .statement {
+  align-self: end;
 }
 
 main > .intro {
