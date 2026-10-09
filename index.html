@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Olivia — Software Developer</title>
+  <meta name="description" content="Portfolio of Olivia, a software developer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Fragment+Mono&family=Ms+Madi&family=Shrikhand&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav wrap">
+    <a href="#top" class="logo">
+      <span class="logo-mark">Olivia</span>
+      <span class="logo-script">Schecklman</span>
+    </a>
+    <nav>
+      <!-- <a href="#work">work</a> -->
+      <a href="#skills">skills</a>
+      <a href="#journey">journey</a>
+      <a href="#contact">contact</a>
+      <!-- Opens resume.pdf (put it next to index.html) in a new tab -->
+      <a class="pill pill--pink" href="resume.pdf" target="_blank" rel="noopener">resume ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Photo hero (handwritten notes + giant pink name over a halftone photo): hidden until there's a
+         photo. To bring it back, delete the comment markers around this section (including the pair
+         around the "Replace the placeholder" note) and swap in the photo.
+    <section class="hero wrap">
+      <p class="note hero-note hero-note--hi">Hello there!</p>
+      <p class="note hero-note hero-note--guide">since you're new here,<br />let me be your tour guide</p>
+
+-->
+      <!-- Replace the placeholder with <img src="me.jpg" alt="Olivia" /> -->
+<!--
+      <figure class="hero-photo halftone">
+        <span class="placeholder-label">your photo</span>
+      </figure>
+
+      <h1 class="hero-name">Olivia</h1>
+
+      <svg class="doodle hero-arrow" viewBox="0 0 160 90" aria-hidden="true">
+        <path d="M150 8C120 4 96 20 92 40c-4 20 22 22 20 6-2-14-30-10-44 4C50 66 30 78 8 80" />
+        <path d="M18 70L8 80l13 5" />
+      </svg>
+
+      <div class="hero-foot">
+        <span>Meet the Dev</span>
+      </div>
+    </section>
+    -->
+
+
+    <p class="meet-tag wrap">Meet the Dev</p>
+
+    <!-- Intro -->
+    <section class="intro wrap">
+      <p class="statement">builder.<br />problem&#8209;solver.<br />lifelong learner.</p>
+      <div class="intro-copy">
+        <p>
+          Hi, I’m Olivia, a software developer drawn to real problems and the
+          people behind them.
+        </p>
+        <p>
+          I love understanding how things work and finding ways to make them
+          better. My work brings together system design, full-stack
+          development, and AI orchestration. 
+        </p>
+        <p>
+          Along the way I learn fast, ask a
+          lot of questions, and welcome ideas that challenge my own.
+        </p>
+        <p>
+          Got a problem to solve? Let’s build something together.
+        </p>
+      </div>
+    </section>
+
+    <!-- Work: hidden until there are projects to show. To bring it back, delete the comment markers
+         around this section (including the two pairs around the "Replace with" notes), restore the
+         "work" nav link, and renumber the section headings (this one is 01).
+    <section id="work" class="wrap">
+      <header class="sec-head">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">show &amp; tell</h2>
+        <p class="note sec-note">fresh out of my editor</p>
+      </header>
+
+      <div class="projects">
+        <article class="project" style="--tilt: -1.5deg">
+          <figure class="project-shot">
+            <span class="tape" aria-hidden="true"></span>
+-->
+            <!-- Replace with <img src="project-one.png" alt="Project One screenshot" /> -->
+<!--
+            <div class="thumb halftone"><span class="placeholder-label">&lt;/&gt;</span></div>
+          </figure>
+          <div class="project-info">
+            <span class="project-num">#01</span>
+            <h3>Project One</h3>
+            <p class="meta">React · Node.js · Postgres</p>
+            <a href="#" class="pill" target="_blank" rel="noopener">explore →</a>
+          </div>
+        </article>
+
+        <article class="project" style="--tilt: 1.5deg">
+          <figure class="project-shot">
+            <span class="tape" aria-hidden="true"></span>
+-->
+            <!-- Replace with <img src="project-two.png" alt="Project Two screenshot" /> -->
+<!--
+            <div class="thumb halftone"><span class="placeholder-label">&lt;/&gt;</span></div>
+          </figure>
+          <div class="project-info">
+            <span class="project-num">#02</span>
+            <h3>Project Two</h3>
+            <p class="meta">Python · FastAPI · Docker</p>
+            <a href="#" class="pill" target="_blank" rel="noopener">explore →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+    -->
+
+    <!-- Skills -->
+    <section id="skills" class="wrap">
+      <header class="sec-head">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">dev tools</h2>
+        <p class="note sec-note">click around — it's like the sims</p>
+      </header>
+
+      <!-- Sims-style skill menu: categories/skills are defined in skillTree in the script at the bottom -->
+      <div class="sim-window">
+        <div class="sim-titlebar">
+          <span aria-hidden="true"></span>
+          <span class="sim-wintitle">dev_tools.sim</span>
+          <span class="sim-winctl" aria-hidden="true">— ▢ ✕</span>
+        </div>
+        <div class="sim-hud" aria-hidden="true">
+          <span>♥ mood: <b>focused</b></span>
+          <span>⚡ energy <span class="sim-bar"><span style="width:72%"></span></span></span>
+          <span>☕ caffeine <span class="sim-bar"><span style="width:90%"></span></span></span>
+        </div>
+        <div class="sim-stage">
+          <button class="pill pill--pink sim-text-btn" type="button" aria-haspopup="dialog" aria-controls="skills-text">view as text ☰</button>
+      <div class="sim-menu" id="sim-menu">
+        <div class="sim-center">
+          <svg class="plumbob" viewBox="0 0 40 80" aria-hidden="true">
+            <path class="plumbob-l" d="M20 0L0 40L20 80Z" />
+            <path class="plumbob-r" d="M20 0L40 40L20 80Z" />
+            <path class="plumbob-shine" d="M20 4L8 38L20 30Z" />
+          </svg>
+          <div class="sim-figure">
+            <img src="images/sim-avatar.png" alt="Illustrated avatar of Olivia in a cream suit, holding a laptop and an energy drink" />
+          </div>
+        </div>
+      </div>
+        </div>
+        <p class="sim-status" aria-hidden="true"><span>● online</span><span>click a bubble to interact</span></p>
+      </div>
+
+      <!-- "View as text" pop-up: draggable by its title bar, filled from skillTree by the script -->
+      <div class="sim-window text-window" id="skills-text" role="dialog" aria-labelledby="skills-text-title" hidden>
+        <div class="sim-titlebar text-window-bar">
+          <span aria-hidden="true"></span>
+          <span class="sim-wintitle" id="skills-text-title">skills.txt</span>
+          <button class="text-window-close" type="button" aria-label="Close skills list">✕</button>
+        </div>
+        <div class="text-window-body"></div>
+      </div>
+
+      <noscript>
+        <ul class="skills">
+          <li class="pill">.NET</li>
+          <li class="pill">C#</li>
+          <li class="pill">C</li>
+          <li class="pill">C++</li>
+          <li class="pill">JavaScript</li>
+          <li class="pill">Java</li>
+          <li class="pill">TypeScript</li>
+          <li class="pill">Dart</li>
+          <li class="pill">Flutter</li>
+          <li class="pill">VB</li>
+          <li class="pill">AutoLISP</li>
+          <li class="pill">React</li>
+          <li class="pill">Node.js</li>
+          <li class="pill">Python</li>
+          <li class="pill">SQL</li>
+          <li class="pill">NoSQL</li>
+          <li class="pill">HTML &amp; CSS</li>
+          <li class="pill">Git</li>
+          <li class="pill">REST APIs</li>
+        </ul>
+      </noscript>
+    </section>
+
+    <!-- Journey -->
+    <section id="journey" class="wrap">
+      <header class="sec-head">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">changelog</h2>
+        <p class="note sec-note">every version of me so far</p>
+      </header>
+
+      <!-- Career changelog: newest first. Edit entries below; data-version is what the counter ticks up to -->
+      <div class="changelog" id="changelog">
+        <div class="changelog-tab">CHANGELOG.md</div>
+        <ol class="releases">
+          <li class="release is-current" style="--i:0">
+            <div class="release-meta">
+              <span class="release-version">unreleased</span>
+              <time>Today</time>
+            </div>
+            <div class="release-body">
+              <h3>Where I am now <span class="release-tag">in progress</span></h3>
+              <ul>
+              <li>To be continued...</li>
+              </ul>
+            </div>
+          </li>
+          <li class="release" style="--i:1">
+            <div class="release-meta">
+              <span class="release-version" data-version="1.1.0">v1.1.0</span>
+              <time>June 2024</time>
+            </div>
+            <div class="release-body">
+              <h3>First job <span class="release-tag">new</span></h3>
+              <ul>
+              <li>KI Furniture · Software Developer</li>
+              </ul>
+            </div>
+          </li>
+          <li class="release" style="--i:2">
+            <div class="release-meta">
+              <span class="release-version" data-version="1.0.0">v1.0.0</span>
+              <time>May 2024</time>
+            </div>
+            <div class="release-body">
+              <h3>Graduated <span class="release-tag">stable release</span></h3>
+              <ul>
+              <li>B.S. Software Technology</li>
+              <li>B.A. Interactive Web Management</li>
+              </ul>
+            </div>
+          </li>
+          <li class="release" style="--i:3">
+            <div class="release-meta">
+              <span class="release-version" data-version="0.5.0">v0.5.0</span>
+              <time>June 2023</time>
+            </div>
+            <div class="release-body">
+              <h3>First internship <span class="release-tag">beta</span></h3>
+              <ul>
+              <li>Mercury Marine · Software Engineering Co-Op</li>
+              </ul>
+            </div>
+          </li>
+          <li class="release" style="--i:4">
+            <div class="release-meta">
+              <span class="release-version" data-version="0.1.0">v0.1.0</span>
+              <time>September 2019</time>
+            </div>
+            <div class="release-body">
+              <h3>Started school <span class="release-tag">initial commit</span></h3>
+              <ul>
+              <li>University of Wisconsin-Oshkosh</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Tech Girl intro card — answers are written in .answer spans; move .circled to change a pick -->
+    <section id="intro-card" class="wrap">
+      <header class="sec-head">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">vibe check</h2>
+        <p class="note sec-note">a little more about me</p>
+      </header>
+
+      <!-- On desktop the pages dissolve into one sheet (display: contents); on phones they become flippable pages -->
+      <div class="techgirl" id="vibe-book">
+        <div class="tg-page" data-page="1">
+          <header class="tg-formhead">
+            <div>
+              <p class="tg-form-title">VIBE CHECK</p>
+              <p class="tg-form-sub">personal information form · please print clearly</p>
+            </div>
+            <p class="tg-form-no">FORM VC-04<br />REV. 2026</p>
+          </header>
+
+          <figure class="polaroid">
+            <div class="polaroid-photo">
+              <img src="images/vibe-avatar.png" alt="Illustrated Olivia bundled in blankets, coding on a laptop in bed" />
+            </div>
+          </figure>
+
+          <div class="tg-field tg-friends">
+            <p class="tg-label">FRIENDS CALL ME:</p>
+            <p class="tg-line"><span class="answer">liv / via</span></p>
+          </div>
+
+          <div class="tg-field tg-title-job">
+            <p class="tg-label">UNOFFICIAL JOB TITLE:</p>
+            <p class="tg-line"><span class="answer">the emoji dev</span></p>
+          </div>
+
+          <p class="tg-runfoot" aria-hidden="true">VC-04 · page 1 of 3</p>
+        </div>
+
+        <div class="tg-page" data-page="2">
+          <div class="tg-field tg-time">
+            <p class="tg-label">SOMETHING I ALWAYS HAVE TIME FOR:</p>
+            <p class="tg-line"><span class="answer">a sweet treat</span></p>
+          </div>
+
+          <div class="tg-field tg-queue">
+            <p class="tg-label">CURRENTLY IN THE LEARNING QUEUE:</p>
+            <ol class="tg-list">
+              <li><span class="tg-line"><span class="answer">react js</span></span></li>
+              <li><span class="tg-line"><span class="answer">blender</span></span></li>
+              <li><span class="tg-line"><span class="answer">system design</span></span></li>
+            </ol>
+          </div>
+
+          <div class="tg-field tg-app">
+            <p class="tg-label">FAVORITE APP:</p>
+            <p class="tg-line"><span class="answer">tiktok + pinterest</span></p>
+          </div>
+
+          <div class="tg-field tg-outfit">
+            <p class="tg-label">GO-TO OUTFIT:</p>
+            <p class="tg-line"><span class="answer">an aritzia sweatsuit + uggs</span></p>
+          </div>
+
+          <div class="tg-field tg-opinion">
+            <p class="tg-label">A SURPRISINGLY STRONG OPINION I HAVE ABOUT DESIGN:</p>
+            <p class="tg-line"><span class="answer">body fonts should always be sans-serif</span></p>
+          </div>
+          <p class="tg-runfoot" aria-hidden="true">VC-04 · page 2 of 3</p>
+        </div>
+
+        <div class="tg-page" data-page="3">
+          <div class="tg-circle">
+            <p class="tg-circle-title">CIRCLE ONE <span>(1) answer per line</span></p>
+            <div class="tg-row">
+              <p class="tg-row-label">PROBLEM-SOLVING STYLE:</p>
+              <ul>
+                <li>PING A FRIEND</li>
+                <li>FIGURE IT OUT MYSELF</li>
+                <li class="circled">ASK CLAUDE</li>
+                <li>CRY THEN FIX IT</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tg-circle tg-circle--cont">
+            <div class="tg-row">
+              <p class="tg-row-label">INBOX:</p>
+              <ul>
+                <li class="circled">ZERO</li>
+                <li>3,000 UNREAD</li>
+                <li>DON'T ASK</li>
+              </ul>
+            </div>
+
+            <div class="tg-row">
+              <p class="tg-row-label">WEEKEND ENERGY:</p>
+              <ul>
+                <li>BRUNCH</li>
+                <li>PROJECT MODE</li>
+                <li class="circled">BED ROT</li>
+                <li>ADVENTURE</li>
+              </ul>
+            </div>
+          </div>
+
+          <span class="tg-asterisk" aria-hidden="true">*</span>
+          <p class="tg-runfoot" aria-hidden="true">VC-04 · page 3 of 3</p>
+        </div>
+      </div>
+
+      <div class="tg-pager" aria-label="Page controls">
+        <button class="pill tg-prev" type="button" aria-label="Previous page">← prev</button>
+        <span class="tg-page-count" aria-live="polite">page 1 of 3</span>
+        <button class="pill tg-next" type="button" aria-label="Next page">next →</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact / outro -->
+
+  <div class="outro wrap">
+    <p class="statement outro-top">and that's</p>
+
+    <div class="outro-body">
+      <!-- Opens as you scroll: --open drives the flap, --lift slides the letter out -->
+      <div class="envelope" id="envelope">
+        <div class="env-back" aria-hidden="true"></div>
+        <div class="letter">
+          <p class="note">
+            thank you so much for taking the time to look through my portfolio!
+            if you'd like to build something together, i'd love to chat.
+          </p>
+          <p class="note letter-sign">— Olivia</p>
+        </div>
+        <div class="env-front" aria-hidden="true"></div>
+        <div class="env-flap" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <p class="statement outro-bottom">a wrap.</p>
+  </div>
+
+  <footer id="contact" class="site-footer wrap">
+    <div class="footer-row">
+      <p>olivia schecklman · <span id="year"></span></p>
+      <ul class="footer-links">
+        <li><a href="mailto:oliviaschecklman@gmail.com">email</a></li>
+        <li><a href="https://github.com/livscheck" target="_blank" rel="noopener">github</a></li>
+        <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">linkedin</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="cats.js"></script>
+</body>
+</html>
