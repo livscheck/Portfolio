@@ -427,6 +427,13 @@ main > .intro {
   place-items: center;
 }
 
+img.thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 .thumb .placeholder-label {
   font-size: 1.4rem;
 }
