@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Olivia Bot — Olivia</title>
+  <meta name="description" content="A pink, iMessage-style desktop chat app where my friends can text an AI that texts like me" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Fragment+Mono&family=Ms+Madi&family=Shrikhand&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+  <header class="nav wrap">
+    <a href="../index.html#top" class="logo">
+      <span class="logo-mark">Olivia</span>
+      <span class="logo-script">Schecklman</span>
+    </a>
+    <nav>
+      <a href="../index.html#work">work</a>
+      <a class="pill pill--pink" href="../Olivia-Schecklman-Resume.docx" download>resume ↓</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <a class="pill post-back" href="../index.html#work">← show &amp; tell</a>
+
+    <header class="post-head">
+      <p class="post-kicker">project — ai</p>
+      <h1 class="post-title">Olivia Bot</h1>
+      <p class="post-tagline">A pink, iMessage-style desktop chat app where my friends can text an AI that texts like me</p>
+      <div class="post-facts"><span class="chip chip--live">launched</span><span class="chip">ai</span><span class="chip">desktop</span><span class="chip">chatbot</span><span class="chip">game-engine</span></div>
+      <div class="post-links"><a class="pill pill--pink" href="https://github.com/livscheck/olivia-bot/releases/latest" target="_blank" rel="noopener">try it ↓</a><a class="pill" href="https://github.com/livscheck/olivia-bot" target="_blank" rel="noopener">code →</a></div>
+    </header>
+
+    <figure class="post-hero"><span class="tape" aria-hidden="true"></span><img src="../images/olivia-bot.webp" alt="A pink chat window with light-pink and hot-pink message bubbles, a heart reaction on one message and a GIF reply, next to a sidebar of saved chats" /><figcaption>olivia bot in action</figcaption></figure>
+
+    <div class="post-body">
+      <div class="post-story">
+      <section id="problem">
+        <header class="sec-head">
+          <span class="sec-num">01</span>
+          <h2 class="sec-title">the why</h2>
+          <p class="note sec-note">why i built it</p>
+        </header>
+        <div class="prose"><p>I'm moving to a new city, and I wanted to leave my friends something more fun than a goodbye: a chat app where they can text "me" anytime. It's for friends who'd laugh at a bot that says "LOL" and "fr????" in all lowercase, and who know it's a bot. The hard part was making it actually sound like me instead of a polite assistant, without letting it make things up or overshare.</p></div>
+      </section>
+      <section id="process">
+        <header class="sec-head">
+          <span class="sec-num">02</span>
+          <h2 class="sec-title">how it works</h2>
+          <p class="note sec-note">the guts</p>
+        </header>
+        <div class="prose"><p>The app is a Godot 4.7 project written in C#. The whole UI is drawn in code: the pink gradient and twinkling sparkles, iMessage-style bubbles with curled tails, tapback badges, a typing indicator and a sidebar of saved chats. There are no image assets besides the app icon.</p>
+<p>When a friend sends a message, the app runs Claude Code headless on their computer (<code>claude -p</code>) with my persona file as the system prompt and the recent chat as input. The model answers with a JSON array of one to three short texts, and the app shows them one at a time with a typing delay sized to each message. A text can also be a special command instead of a message:</p>
+<ul>
+<li><code>REACT: ❤️</code> puts a tapback on the friend's last message.</li>
+<li><code>GIF: happy dance</code> searches GIPHY (G-rated) and sends the result.</li>
+<li><code>NAME: Millie</code> tells the app who it's talking to, so it can remember them. The friend never sees it.</li>
+</ul>
+<p>When a friend sends a photo, it's copied alone into an empty temp folder and the model gets only the Read tool there, so it can react to what's actually in the picture without seeing anything else.</p>
+<p>Chats are saved as JSON on the friend's computer and get a short lowercase title once the bot has replied, like Claude's sidebar.</p>
+<h2>Key decisions</h2>
+<ul>
+<li><strong>Claude Code instead of an API key:</strong> each friend uses their own Claude login, so there's no key to ship or server to pay for. The tradeoff is that friends need Claude Code installed.</li>
+<li><strong>No tools, no MCP servers:</strong> the model runs with tools and MCP servers off, so it can only see the chat and the persona. Even if someone asks it to, it can't read files.</li>
+<li><strong>The personality is one Markdown file:</strong> <code>persona.md</code> holds the voice rules, real example texts, GIF etiquette and boundaries, so tuning the bot means editing text, not code.</li>
+<li><strong>Godot for a desktop app:</strong> it gave me a custom-looking window, smooth animation and a one-folder Windows build without a web stack. Godot has no GIF loader, so GIFs are decoded into frames with System.Drawing.</li>
+<li><strong>The friend texts first:</strong> new chats start empty, and the bot learns who it's talking to from the conversation instead of a sign-up screen.</li>
+</ul></div>
+      </section>
+      <section id="challenges">
+        <header class="sec-head">
+          <span class="sec-num">03</span>
+          <h2 class="sec-title">the hard parts</h2>
+          <p class="note sec-note">where it fought back</p>
+        </header>
+        <div class="prose"><article class="challenge"><h2>Making it sound like me</h2>
+<p><strong>Problem:</strong> The first replies sounded like a cheerful assistant ("easy peasy 😎"), which is not how I text.</p>
+<p><strong>What I tried:</strong> Describing my style in general terms ("casual, friendly") wasn't enough. The model filled the gaps with its own idea of casual.</p>
+<p><strong>Fix:</strong> I wrote the persona from my real messages: all lowercase, dropped apostrophes, "LOL" and "fr????", short bursts, almost no emoji, plus a handful of real texts as examples. Then I added specific bans for things I never do, like saying "hey", starting every question with "wait", or giving advice nobody asked for. It also asks way more than it tells, because that's how I actually talk to friends.</p></article>
+<article class="challenge"><h2>Catching what it gets wrong</h2>
+<p><strong>Problem:</strong> One-off test messages looked fine, but longer chats showed problems: it made up details about my life, offered to "run over to your desk", and once leaked its own self-correction ("wait, that breaks my persona rule, let me fix it") into the chat.</p>
+<p><strong>What I tried:</strong> Testing by hand was too slow to cover enough situations.</p>
+<p><strong>Fix:</strong> I asked Claude to play out full conversations between the bot and a simulated friend (a coworker with a bug, someone sharing big news, someone asking if it's a bot...) and write them to a file I could read through. Each round showed something to tighten: rules against inventing facts or being somewhere in person, joking dodges for personal questions ("a very important project called answering my phone"), and parsing that keeps only the bot's final JSON array, so stray notes never show.</p></article></div>
+      </section>
+      <section id="learned">
+        <header class="sec-head">
+          <span class="sec-num">04</span>
+          <h2 class="sec-title">what i learned</h2>
+          <p class="note sec-note">notes to future me</p>
+        </header>
+        <div class="prose"><ul>
+<li>Voice comes from specifics. Real example texts and a few hard "never do this" rules did more than any description of a personality.</li>
+<li>Single test prompts hide problems. Playing out whole simulated conversations is what showed the made-up facts and leaked notes.</li>
+<li>A bot that dodges with a joke feels more like a person than one that explains it's a bot. Leaning on "im a bot" made it feel less like me.</li>
+<li>Shipping to friends who aren't developers is its own project: a one-click launch and a bundled runtime matter as much as the features.</li>
+</ul></div>
+      </section>
+      </div>
+      <aside class="spec" aria-label="Project details">
+        <p class="spec-title">Spec sheet</p>
+        <dl><dt>languages</dt><dd>C#</dd><dt>frameworks</dt><dd>Godot 4.7 · .NET 8</dd><dt>tools</dt><dd>System.Drawing · GitHub Releases</dd><dt>services</dt><dd>GIPHY API</dd><dt>ai</dt><dd>Claude Code CLI (headless)</dd><dt>models</dt><dd>Claude (the friend&#x27;s own Claude Code model)</dd><dt>techniques</dt><dd>persona prompting · structured output (JSON array of texts) · vision on shared photos · simulated-conversation testing</dd><dt>platforms</dt><dd>desktop</dd><dt>timeline</dt><dd>11/09/2026 – now</dd><dt>changelog</dt><dd><ul class="versions"><li><span class="v">v1.0</span>First public release for Windows<span class="vdate">11/10/2026</span></li></ul></dd></dl>
+      </aside>
+    </div>
+
+    <div class="post-end">
+      <p class="note">thanks for reading!</p>
+      <a class="pill" href="../index.html#work">← back to show &amp; tell</a>
+    </div>
+  </main>
+
+  <footer class="site-footer wrap">
+    <div class="footer-row">
+      <p>olivia schecklman · <span id="year"></span></p>
+      <ul class="footer-links">
+        <li><a href="mailto:oliviaschecklman@gmail.com">email</a></li>
+        <li><a href="https://github.com/livscheck" target="_blank" rel="noopener">github</a></li>
+        <li><a href="https://www.linkedin.com/in/oliviaschecklman" target="_blank" rel="noopener">linkedin</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+/* Project "blog post" page. Builds on styles.css (same tokens, fonts, pills, tape). */
+
+.post-back {
+  margin-top: 1rem;
+}
+
+/* ---------- Header ---------- */
+.post-head {
+  margin-top: 3rem;
+}
+
+.post-kicker {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--soft);
+}
+
+.post-title {
+  font-family: var(--bubble);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 9vw, 6rem);
+  line-height: 1;
+  color: var(--pink);
+  transform: rotate(-3deg);
+  transform-origin: left bottom;
+  margin: 0.6rem 0 1.2rem;
+}
+
+.post-tagline {
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--gray);
+  max-width: 34ch;
+}
+
+.post-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.6rem;
+}
+
+.chip {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: var(--pink-wash);
+  color: var(--pink-ink);
+}
+
+.chip--live::before {
+  content: '● ';
+  color: var(--pink-hi);
+}
+
+.post-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+/* ---------- Hero polaroid ---------- */
+.post-hero {
+  position: relative;
+  margin: 4rem auto 0;
+  padding: 0.9rem 0.9rem 0;
+  max-width: 760px;
+  background: var(--paper);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: rotate(-1deg);
+}
+
+.post-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.post-hero figcaption {
+  font-family: var(--script);
+  font-size: 1.8rem;
+  text-align: center;
+  padding: 0.4rem 0 0.7rem;
+}
+
+/* ---------- Body: story column + spec sheet ---------- */
+.post-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 4rem;
+  margin-top: 6rem;
+  align-items: start;
+}
+
+.post-story > section + section {
+  margin-top: 5rem;
+}
+
+.post-story .sec-head {
+  margin-bottom: 1.6rem;
+}
+
+.post-story .sec-title {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+}
+
+.prose p,
+.prose ul {
+  max-width: 62ch;
+}
+
+.prose p + p,
+.prose p + ul,
+.prose ul + p {
+  margin-top: 1rem;
+}
+
+.prose h2 {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  margin: 2.2rem 0 0.8rem;
+}
+
+.prose ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.8rem;
+}
+
+.prose li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.prose li + li {
+  margin-top: 0.6rem;
+}
+
+.prose li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--pink-hi);
+  font-size: 0.8rem;
+  top: 0.15rem;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--pink-wash);
+  color: var(--pink-ink);
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+}
+
+.prose a {
+  background-image: linear-gradient(var(--pink), var(--pink));
+  background-size: 100% 35%;
+  background-position: 0 90%;
+  background-repeat: no-repeat;
+}
+
+.prose strong {
+  font-weight: 700;
+}
+
+/* Challenges: each one is a taped index card */
+.challenge {
+  position: relative;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  padding: 2rem 1.8rem 1.6rem;
+  margin-top: 2.6rem;
+}
+
+.challenge:nth-child(even) {
+  transform: rotate(0.6deg);
+}
+
+.challenge:nth-child(odd) {
+  transform: rotate(-0.5deg);
+}
+
+.challenge h2 {
+  margin-top: 0;
+}
+
+/* "Problem:", "What I tried:", "Fix:" become little mono labels */
+.challenge p > strong:first-child {
+  display: block;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  color: var(--pink-ink);
+  margin-bottom: 0.15rem;
+}
+
+/* ---------- Spec sheet (sticky on wide screens) ---------- */
+.spec {
+  position: sticky;
+  top: 2rem;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  padding: 1.4rem 1.3rem;
+  font-size: 0.9rem;
+}
+
+.spec-title {
+  font-family: var(--sans);
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-bottom: 3px double var(--ink);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.spec dt {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--pink-ink);
+  text-transform: lowercase;
+  margin-top: 0.9rem;
+}
+
+.spec dt:first-of-type {
+  margin-top: 0;
+}
+
+.spec dd {
+  margin-top: 0.2rem;
+  line-height: 1.4;
+}
+
+.spec .versions {
+  list-style: none;
+  padding: 0;
+}
+
+.spec .versions li + li {
+  margin-top: 0.45rem;
+}
+
+.spec .v {
+  font-family: var(--mono);
+  color: var(--pink-ink);
+  margin-right: 0.3rem;
+}
+
+.spec .vdate {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--soft);
+}
+
+.post-end {
+  margin-top: 6rem;
+  text-align: center;
+}
+
+.post-end .note {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 860px) {
+  .post-body {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .spec {
+    position: static;
+    order: -1;
+  }
+}
