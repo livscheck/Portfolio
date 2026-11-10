@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dungeon of Agents — Olivia</title>
+  <meta name="description" content="A top-down PSX-style dungeon where every Claude Code session is a character you can walk up to" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Fragment+Mono&family=Ms+Madi&family=Shrikhand&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+  <header class="nav wrap">
+    <a href="../index.html#top" class="logo">
+      <span class="logo-mark">Olivia</span>
+      <span class="logo-script">Schecklman</span>
+    </a>
+    <nav>
+      <a href="../index.html#work">work</a>
+      <a class="pill pill--pink" href="../Olivia-Schecklman-Resume.docx" download>resume ↓</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <a class="pill post-back" href="../index.html#work">← show &amp; tell</a>
+
+    <header class="post-head">
+      <p class="post-kicker">project — ai</p>
+      <h1 class="post-title">Dungeon of Agents</h1>
+      <p class="post-tagline">A top-down PSX-style dungeon where every Claude Code session is a character you can walk up to</p>
+      <div class="post-facts"><span class="chip">development</span><span class="chip">ai</span><span class="chip">game</span><span class="chip">desktop</span><span class="chip">developer-tools</span></div>
+      <div class="post-links"><a class="pill" href="https://github.com/livscheck/dungeon-of-agents" target="_blank" rel="noopener">code →</a></div>
+    </header>
+
+    <figure class="post-hero"><span class="tape" aria-hidden="true"></span><img src="../images/dungeon-of-agents.webp" alt="Dungeon of Agents: a hooded figure in a dim stone dungeon room, with a red banner reading 1 agent awaiting you" /><figcaption>dungeon of agents in action</figcaption></figure>
+
+    <div class="post-body">
+      <div class="post-story">
+      <section id="problem">
+        <header class="sec-head">
+          <span class="sec-num">01</span>
+          <h2 class="sec-title">the why</h2>
+          <p class="note sec-note">why i built it</p>
+        </header>
+        <div class="prose"><p>When I have several Claude Code sessions going at once, it's hard to tell at a glance which ones are still working, which are done, and which are stuck waiting on me. A list of sessions doesn't make that obvious, and a session waiting for my answer can sit there for a long time before I notice. I wanted a more fun way to keep track of them: a little dungeon where every session is a character.</p></div>
+      </section>
+      <section id="process">
+        <header class="sec-head">
+          <span class="sec-num">02</span>
+          <h2 class="sec-title">how it works</h2>
+          <p class="note sec-note">the guts</p>
+        </header>
+        <div class="prose"><p>The game is a Godot 4.7 (.NET) project in C#. It reads the Claude desktop app's session list and transcripts on the same computer, with no setup needed, and gives every Claude Code session its own character in a top-down, PSX-style dungeon. A session keeps the same character from run to run.</p>
+<ul>
+<li><strong>A status line on each character:</strong> Working, Needs you, Done or Resting, plus the step it's on right now (for example "Running tests" or "Editing Main.cs"), read from the end of its transcript.</li>
+<li><strong>Body language matches state:</strong> working agents walk around with a lit torch, and agents waiting on me are struck down with a red marker. A banner counts them ("2 AGENTS AWAITING YOU").</li>
+<li><strong>Talk to them:</strong> walking up to a character and pressing <strong>E</strong> shows what it did and what it needs, <strong>T</strong> opens that session in Claude, and "send away" hides a session.</li>
+</ul>
+<h2>Key decisions</h2>
+<ul>
+<li><strong>The theme does the work:</strong> the world mirrors the agents' state, so a dungeon full of struck-down characters means I have answers to give, without reading a single list.</li>
+<li><strong>No setup:</strong> it reads the session data Claude already keeps instead of asking me to register projects.</li>
+<li><strong>Make it yours:</strong> characters are just image files in a <code>portraits/</code> folder, and status wording, the map and the PSX look each live in their own place, so the game can be reskinned.</li>
+<li><strong>Safe to try:</strong> a dry-run mode makes every action that would launch or message Claude print what it would do instead.</li>
+<li><strong>An optional project layer:</strong> extra features for one numbered-project workflow (a dashboard, test checklists and handoffs) are off by default, so the base game stays simple.</li>
+</ul></div>
+      </section>
+      </div>
+      <aside class="spec" aria-label="Project details">
+        <p class="spec-title">Spec sheet</p>
+        <dl><dt>languages</dt><dd>C#</dd><dt>frameworks</dt><dd>Godot 4.7 (.NET) · .NET 8</dd><dt>tools</dt><dd>Godot shaders</dd><dt>ai</dt><dd>Claude Code (desktop app sessions)</dd><dt>models</dt><dd>Claude (via Claude Code sessions)</dd><dt>techniques</dt><dd>reading session transcripts for live status · agent state visualization</dd><dt>platforms</dt><dd>desktop</dd></dl>
+      </aside>
+    </div>
+
+    <div class="post-end">
+      <p class="note">thanks for reading!</p>
+      <a class="pill" href="../index.html#work">← back to show &amp; tell</a>
+    </div>
+  </main>
+
+  <footer class="site-footer wrap">
+    <div class="footer-row">
+      <p>olivia schecklman · <span id="year"></span></p>
+      <ul class="footer-links">
+        <li><a href="mailto:oliviaschecklman@gmail.com">email</a></li>
+        <li><a href="https://github.com/livscheck" target="_blank" rel="noopener">github</a></li>
+        <li><a href="https://www.linkedin.com/in/oliviaschecklman" target="_blank" rel="noopener">linkedin</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
