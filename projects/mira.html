@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mira — Olivia</title>
+  <meta name="description" content="A social outfit diary for sharing fit checks with friends, that learns your style as you go" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Fragment+Mono&family=Ms+Madi&family=Shrikhand&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+  <header class="nav wrap">
+    <a href="../index.html#top" class="logo">
+      <span class="logo-mark">Olivia</span>
+      <span class="logo-script">Schecklman</span>
+    </a>
+    <nav>
+      <a href="../index.html#work">work</a>
+      <a class="pill pill--pink" href="../Olivia-Schecklman-Resume.docx" download>resume ↓</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <a class="pill post-back" href="../index.html#work">← show &amp; tell</a>
+
+    <header class="post-head">
+      <p class="post-kicker">project — ux/ui</p>
+      <h1 class="post-title">Mira</h1>
+      <p class="post-tagline">A social outfit diary for sharing fit checks with friends, that learns your style as you go</p>
+      <div class="post-facts"><span class="chip">in progress</span><span class="chip">ux/ui</span><span class="chip">mobile</span><span class="chip">social</span><span class="chip">fashion</span><span class="chip">ai</span></div>
+      <div class="post-links"><a class="pill pill--pink" href="https://www.figma.com/design/Dftk28V4ErR6COBiq6ywGE/Mira-App" target="_blank" rel="noopener">designs →</a><a class="pill" href="https://github.com/livscheck/Mira" target="_blank" rel="noopener">code →</a></div>
+    </header>
+
+    <figure class="post-hero"><span class="tape" aria-hidden="true"></span><img src="../images/mira-app.webp" alt="Three Mira phone screens: a month calendar of outfit photos with a 13 day streak, a full-height outfit post tagged feeling happy, and an edit profile page" /><figcaption>first screens in figma</figcaption></figure>
+
+    <div class="post-body">
+      <div class="post-story">
+      <section id="problem">
+        <header class="sec-head">
+          <span class="sec-num">01</span>
+          <h2 class="sec-title">the why</h2>
+          <p class="note sec-note">why i'm building it</p>
+        </header>
+        <div class="prose"><p>People already take outfit pics and send them to friends, but they get buried in group chats and camera rolls. Nobody can scroll back and see what they wore last month, and the outfits we loved get forgotten.</p>
+<p>Mira gives those photos a home. You post one fit check a day, it goes into your own outfit diary, and the friends you've added see it in their feed. Over time, all those posts add up to a style history that Mira can learn from, so it can help you figure out what to wear. The name comes from <em>mirror</em>, and Mira is also the name of the in-app style assistant.</p>
+<p>It's for people 16 and up who love fashion, already take outfit photos, and like sharing them with friends.</p></div>
+      </section>
+      <section id="process">
+        <header class="sec-head">
+          <span class="sec-num">02</span>
+          <h2 class="sec-title">how it works</h2>
+          <p class="note sec-note">the plan</p>
+        </header>
+        <div class="prose"><p>Mira comes in two layers. The diary and the friends feed come first, because that's what makes people open the app every day. The learning layer grows on top of what they post.</p>
+<h2>1. The diary</h2>
+<ul>
+<li><strong>Post today's fit:</strong> take or upload a photo, add how you're feeling ("feeling: happy"), and rate it on style, comfort and confidence. Only one rating is required, so posting takes seconds.</li>
+<li><strong>Your records:</strong> every outfit lands on a month calendar, one photo per day, with your streak and outfit count underneath.</li>
+</ul>
+<h2>2. The social part</h2>
+<ul>
+<li><strong>Friends feed:</strong> full-height fit checks from people you've added, with likes, comments, saves and shares.</li>
+<li><strong>Close friends, not strangers:</strong> you add people directly by username or invite. There's no explore page full of strangers.</li>
+<li><strong>Share more than outfits:</strong> wishlist items and fun stats, like your most-worn piece or your favorite style this month.</li>
+</ul>
+<h2>3. The learning part</h2>
+<ul>
+<li><strong>Wardrobe:</strong> Mira picks the pieces out of your outfit photos and builds your closet for you. Each piece links to every outfit it shows up in.</li>
+<li><strong>Insights:</strong> see what you reach for, what you never wear, and which combinations you rate highest.</li>
+<li><strong>Mira, the assistant:</strong> ask "what should I wear today?" or "what have I worn with these jeans?" and get answers based on your own outfits instead of trends.</li>
+</ul>
+<p>The app is built in React with Supabase for the database, auth and photo storage. The assistant runs on a separate Python service (mira-rag) that splits each outfit photo into garments, embeds them with FashionCLIP and answers questions with the outfits it used as sources. The app talks to it through two endpoints, one to ingest a new outfit and one to ask a question, so the models can change without touching the app.</p>
+<h2>Key decisions</h2>
+<ul>
+<li><strong>Social first, smart later:</strong> the diary and feed are useful from the first post. The learning features need weeks of outfits to be any good, so they come after people are already posting.</li>
+<li><strong>Your posts are the data:</strong> nobody has to catalog their whole closet. Mira learns from fit checks people were going to post anyway.</li>
+<li><strong>AI does the data entry:</strong> Mira suggests tags and categories and the user confirms, so the app never feels like homework.</li>
+<li><strong>You choose who sees what:</strong> visibility is set per post, connections are direct, and blocking, reporting and deleting your data are easy.</li>
+<li><strong>Don't judge anyone's style:</strong> Mira helps you understand your style, not change it to match a trend.</li>
+<li><strong>Soft and playful look:</strong> cream, black and sand with blush, lilac and powder-blue accents, a pixel display font, and springy motion like buttons that squish and doodles that draw themselves in.</li>
+</ul></div>
+      </section>
+      <section id="now">
+        <header class="sec-head">
+          <span class="sec-num">03</span>
+          <h2 class="sec-title">where it's at</h2>
+          <p class="note sec-note">current state</p>
+        </header>
+        <div class="prose"><p>The product spec, screen inventory and design rules are written, and the first three screens are drafted in Figma from a small component set (header nav, post card, status tags and a star-shaped add button):</p>
+<ul>
+<li><strong>Records:</strong> your outfit diary as a month calendar, with your streak and outfit count.</li>
+<li><strong>Feed:</strong> full-height fit checks from friends, tagged with how the wearer felt.</li>
+<li><strong>Profile:</strong> profile, account and privacy settings on one page.</li>
+</ul>
+<p>The Figma file is organized into cover, read me, components, screens, playground and archive pages so it's ready to grow.</p></div>
+      </section>
+      <section id="next">
+        <header class="sec-head">
+          <span class="sec-num">04</span>
+          <h2 class="sec-title">what's next</h2>
+          <p class="note sec-note">the to-do list</p>
+        </header>
+        <div class="prose"><p>The diary and social screens come first, then the learning features:</p>
+<ul>
+<li><strong>Foundations:</strong> color, type and spacing tokens, plus buttons, inputs, star ratings, chips, empty states and bottom sheets.</li>
+<li><strong>Onboarding:</strong> welcome, sign up, log in, photo and notification permissions, then "post today's fit."</li>
+<li><strong>Post an outfit:</strong> the star button's flow: camera or upload, feeling, ratings, who can see it, then post.</li>
+<li><strong>Friends:</strong> add by username or invite, accept requests, comments sheet, saved posts, block and report.</li>
+<li><strong>Diary views:</strong> outfit detail, edit and delete, week and year calendar views, public profiles.</li>
+<li><strong>Notifications:</strong> a gentle daily reminder and friend activity, each with its own toggle.</li>
+<li><strong>Learning features:</strong> wardrobe built from your photos, insights, outfit planning and the Mira assistant.</li>
+<li><strong>Build it:</strong> React app on Supabase, then the mira-rag service once 30 real outfits are logged.</li>
+</ul></div>
+      </section>
+      <section id="questions">
+        <header class="sec-head">
+          <span class="sec-num">05</span>
+          <h2 class="sec-title">still deciding</h2>
+          <p class="note sec-note">open questions</p>
+        </header>
+        <div class="prose"><ul>
+<li>Should posts be visible to all your friends by default, or private until you share them?</li>
+<li>How fast can posting be? Ratings have to take seconds or people will skip them.</li>
+<li>When should Mira start showing insights, and how do you show them to someone with only a few outfits?</li>
+</ul></div>
+      </section>
+      </div>
+      <aside class="spec" aria-label="Project details">
+        <p class="spec-title">Spec sheet</p>
+        <dl><dt>languages</dt><dd>JavaScript · Python</dd><dt>frameworks</dt><dd>React</dd><dt>services</dt><dd>Supabase</dd><dt>tools</dt><dd>Figma</dd><dt>ai</dt><dd>mira-rag retrieval service (planned)</dd><dt>models</dt><dd>FashionCLIP · rembg u2net_cloth_seg · Grounding DINO + SAM 2</dd><dt>techniques</dt><dd>user flows · component design · garment segmentation · retrieval-augmented generation</dd><dt>platforms</dt><dd>mobile first, then web</dd><dt>status</dt><dd>designing · wireframes in progress</dd></dl>
+      </aside>
+    </div>
+
+    <div class="post-end">
+      <p class="note">thanks for reading!</p>
+      <a class="pill" href="../index.html#work">← back to show &amp; tell</a>
+    </div>
+  </main>
+
+  <footer class="site-footer wrap">
+    <div class="footer-row">
+      <p>olivia schecklman · <span id="year"></span></p>
+      <ul class="footer-links">
+        <li><a href="mailto:oliviaschecklman@gmail.com">email</a></li>
+        <li><a href="https://github.com/livscheck" target="_blank" rel="noopener">github</a></li>
+        <li><a href="https://www.linkedin.com/in/oliviaschecklman" target="_blank" rel="noopener">linkedin</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
