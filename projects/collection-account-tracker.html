@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collection Account Tracker — Olivia</title>
+  <meta name="description" content="Posts debtor payments, works out a law firm's contingency fee, and reports what each creditor is owed each month" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Fragment+Mono&family=Ms+Madi&family=Shrikhand&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+  <header class="nav wrap">
+    <a href="../index.html#top" class="logo">
+      <span class="logo-mark">Olivia</span>
+      <span class="logo-script">Schecklman</span>
+    </a>
+    <nav>
+      <a href="../index.html#work">work</a>
+      <a class="pill pill--pink" href="../Olivia-Schecklman-Resume.docx" download>resume ↓</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <a class="pill post-back" href="../index.html#work">← show &amp; tell</a>
+
+    <header class="post-head">
+      <p class="post-kicker">project — web</p>
+      <h1 class="post-title">Collection Account Tracker</h1>
+      <p class="post-tagline">Posts debtor payments, works out a law firm's contingency fee, and reports what each creditor is owed each month</p>
+      <div class="post-facts"><span class="chip">maintenance</span><span class="chip">web</span><span class="chip">rest-api</span><span class="chip">database</span></div>
+      <div class="post-links"><a class="pill" href="https://github.com/livscheck/CollectionAccountTracker" target="_blank" rel="noopener">code →</a></div>
+    </header>
+
+    <figure class="post-hero"><span class="tape" aria-hidden="true"></span><img src="../images/collection-account-tracker/hero.webp" alt="Accounts page with color-coded status cards, search and status filter, and a sortable list of debts"><figcaption>the accounts screen</figcaption></figure>
+
+    <div class="post-body">
+      <div class="post-story">
+      <section id="problem">
+        <header class="sec-head">
+          <span class="sec-num">01</span>
+          <h2 class="sec-title">the why</h2>
+          <p class="note sec-note">why i built it</p>
+        </header>
+        <div class="prose"><p>When someone pays off a debt through a collection law firm, the money doesn't all go to the business they owed. The firm keeps a percentage, called a contingency fee, and once a month sends each creditor what's left along with a report. Get the math or the month wrong and a creditor is underpaid, or a past report quietly changes.</p>
+<p>I built this app for a job interview, to show I could move from ASP.NET Core MVC to Blazor in about a day of work. Modeling one real step of a law firm's process, posting payments and paying creditors, gave me a reason to use Blazor, LINQ and a REST API together the way a real business app would.</p></div>
+      </section>
+      <section id="process">
+        <header class="sec-head">
+          <span class="sec-num">02</span>
+          <h2 class="sec-title">how it works</h2>
+          <p class="note sec-note">the guts</p>
+        </header>
+        <div class="prose"><h2>How it works</h2>
+<p>The app has three screens. <strong>Accounts</strong> lists every debt with search, a status filter and clickable summary cards. <strong>Account detail</strong> shows one account's history and lets you post a payment, with the firm's fee shown live as you type. <strong>Remittance</strong> shows, for any month, what was collected for each creditor, the firm's fee and the net owed.</p>
+<p>Every screen follows the same path: a Blazor page calls a small API client, which calls my REST API, which uses EF Core and LINQ to query SQL Server running in Docker. The pages never touch the database directly. The app also includes a <strong>How It Works</strong> page that walks through each action (search, add a payment, the remittance report) and shows the real Blazor, REST and LINQ code behind it, pulled live from the source files.</p>
+<figure class="post-hero"><span class="tape" aria-hidden="true"></span><img src="../images/collection-account-tracker/architecture.webp" alt="Architecture: Blazor pages, API client, REST API, EF Core, SQL Server"><figcaption>how the pieces connect</figcaption></figure>
+<h2>Key decisions</h2>
+<ul>
+<li><strong>An API between the pages and the database.</strong> In Blazor Server the pages already run on the server, so they could use the database directly. I went through an API anyway, so the UI only deals with simple data objects, other systems could reuse the same endpoints, and the UI could move to WebAssembly later.</li>
+<li><strong>The fee is stored on each payment, not recalculated.</strong> A remittance is a financial record. If a creditor's rate changes next year, last month's report must not change.</li>
+<li><strong>The server enforces the rules.</strong> The form checks the basics, but the API is what rejects an overpayment, calculates the real fee and marks an account Paid, all saved together in one database transaction.</li>
+<li><strong>The database does the heavy lifting.</strong> Filtering, grouping by creditor and totals all run as SQL, so only the rows a page needs come back. Every endpoint uses a fixed number of queries, however much data there is.</li>
+<li><strong>Money is handled carefully:</strong> <code>decimal</code> instead of floating point, an explicit rounding rule for half-cents, and the fee math in one shared place used by the API, the seed data and the on-screen preview.</li>
+<li><strong>Bootstrap instead of custom CSS.</strong> Late in the project I replaced most of my own styles with Bootstrap's utility classes, which cut the custom CSS by more than half and made every screen consistent.</li>
+</ul></div>
+      </section>
+      <section id="challenges">
+        <header class="sec-head">
+          <span class="sec-num">03</span>
+          <h2 class="sec-title">the hard parts</h2>
+          <p class="note sec-note">where it fought back</p>
+        </header>
+        <div class="prose"><article class="challenge"><h2>A helper method that compiled but broke the database queries</h2>
+<p><strong>Problem:</strong> "Balance" (amount owed minus amount paid) appeared in five places in my API, so I moved it into a small C# helper method. It compiled, but sorting accounts by balance and adding up balances per status both failed when they ran.</p>
+<p><strong>What I tried:</strong> I had EF Core print the SQL it would generate for each query. It could handle the helper when building results, but not when sorting or summing, because it can't translate a C# method into SQL. Writing the subtraction out by hand worked, but meant repeating the same formula everywhere.</p>
+<p><strong>Fix:</strong> I made Balance a computed column that SQL Server calculates itself. Now it's defined once and works in every query, sort and total, and I checked the generated SQL for each endpoint to confirm it. The lesson I took away: code inside a database query has to be something the database understands.</p></article>
+<article class="challenge"><h2>The database container kept shutting down</h2>
+<p><strong>Problem:</strong> SQL Server ran in Docker, but the container would start and then stop a few seconds later, so the app couldn't connect.</p>
+<p><strong>What I tried:</strong> Its logs showed the password I'd set was rejected as too weak, so SQL Server never finished starting. Fixing the password in my settings file didn't help at first, because SQL Server only reads that password the very first time it creates its storage, and the password in the app's connection settings didn't match it either.</p>
+<p><strong>Fix:</strong> I chose a password that met SQL Server's rules, started the container fresh so it picked up the new one, and made sure the app used the same password. I wrote the password rules into the README so the next person setting it up doesn't hit the same wall.</p></article>
+<article class="challenge"><h2>The grid ignored my styling</h2>
+<p><strong>Problem:</strong> I wanted more breathing room in the table rows, but my padding had no effect. The rows stayed cramped no matter what I set.</p>
+<p><strong>What I tried:</strong> QuickGrid, the table component I used, ships its own stylesheet, and its rule was slightly more specific than mine, so the browser chose its padding. Making my rule more specific worked, but it was a workaround I'd have to repeat for every grid.</p>
+<p><strong>Fix:</strong> I turned off QuickGrid's built-in theme so all the grids use Bootstrap's standard table styles instead, defined once and shared everywhere. This was part of moving the whole app onto Bootstrap's utility classes.</p></article></div>
+      </section>
+      <section id="results">
+        <header class="sec-head">
+          <span class="sec-num">04</span>
+          <h2 class="sec-title">the results</h2>
+          <p class="note sec-note">what came out of it</p>
+        </header>
+        <div class="prose"><ul>
+<li><strong>Working app in 5 days</strong> (11/12–11/16/2026): three main screens, a code walkthrough page and an in-app demo checklist.</li>
+<li><strong>5 REST endpoints across 2 controllers</strong>, each tested with a ready-made request file that also covers the error cases (400 and 404).</li>
+<li><strong>No N+1 queries:</strong> every endpoint runs a fixed number of database queries (one or two), which I confirmed by checking the SQL that EF Core generates.</li>
+<li><strong>Custom CSS cut from 878 lines to 393</strong> by moving the styling to Bootstrap's utility classes.</li>
+<li><strong>Seeds 25 fake accounts</strong> with payments in the current and previous month, so the demo always has realistic data.</li>
+</ul>
+<figure class="post-hero"><span class="tape" aria-hidden="true"></span><img src="../images/collection-account-tracker/account-detail.webp" alt="Account detail page with payment history and the add-payment form" loading="lazy"><figcaption>posting a payment</figcaption></figure>
+<figure class="post-hero"><span class="tape" aria-hidden="true"></span><img src="../images/collection-account-tracker/remittance.webp" alt="Monthly remittance report grouped by creditor" loading="lazy"><figcaption>the monthly remittance</figcaption></figure>
+<figure class="post-hero"><span class="tape" aria-hidden="true"></span><img src="../images/collection-account-tracker/how-it-works.webp" alt="How It Works page showing Blazor, REST and LINQ code for each action" loading="lazy"><figcaption>the code walkthrough page</figcaption></figure></div>
+      </section>
+      <section id="learned">
+        <header class="sec-head">
+          <span class="sec-num">05</span>
+          <h2 class="sec-title">what i learned</h2>
+          <p class="note sec-note">notes to future me</p>
+        </header>
+        <div class="prose"><ul>
+<li><strong>Blazor felt different from MVC in one big way:</strong> a page is a component that stays alive and updates only what changed, instead of a new page on every click. Two-way data binding replaced most of what I used to do with form posts.</li>
+<li><strong>Code that compiles isn't always code the database can run.</strong> LINQ queries are translated into SQL, so I learned to keep anything inside a query to things SQL understands and do the rest after the data comes back.</li>
+<li><strong>Some Blazor defaults have side effects.</strong> By default a page renders twice when it first loads, which called my API twice; turning that off made data loading simpler.</li>
+<li><strong>In v2 I'd add</strong> database migrations, so the schema can change without rebuilding the database, plus a way to change an account's status, payment reversals for bounced checks, and sign-in with user roles.</li>
+<li><strong>I'd also add automated tests</strong> around the fee calculation and the overpayment rule, since those are the parts where a mistake costs real money.</li>
+</ul></div>
+      </section>
+      </div>
+      <aside class="spec" aria-label="Project details">
+        <p class="spec-title">Spec sheet</p>
+        <dl><dt>languages</dt><dd>C# · Razor · SQL</dd><dt>frameworks</dt><dd>Blazor (.NET 10) · ASP.NET Core Web API · Entity Framework Core 10 · Bootstrap 5.3 · QuickGrid</dd><dt>tools</dt><dd>SQL Server 2022 · Docker · Markdig · highlight.js</dd><dt>components</dt><dd>Blazor UI · REST API · Data layer</dd><dt>status</dt><dd>maintenance</dd><dt>dates</dt><dd>11/12/2026 – 11/16/2026</dd></dl>
+      </aside>
+    </div>
+
+    <div class="post-end">
+      <p class="note">thanks for reading!</p>
+      <a class="pill" href="../index.html#work">← back to show &amp; tell</a>
+    </div>
+  </main>
+  <footer class="site-footer wrap">
+    <div class="footer-row">
+      <p>olivia schecklman · <span id="year"></span></p>
+      <ul class="footer-links">
+        <li><a href="mailto:oliviaschecklman@gmail.com">email</a></li>
+        <li><a href="https://github.com/livscheck" target="_blank" rel="noopener">github</a></li>
+        <li><a href="https://www.linkedin.com/in/oliviaschecklman" target="_blank" rel="noopener">linkedin</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
